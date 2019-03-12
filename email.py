@@ -13,18 +13,19 @@ def send_lab_link():
         for x in csv_reader:
             to = [x[1]]
             subject = "Alta3 Lab Access"
+            lab_pass = input("Lab Password")
             if student_count < 10:
                 body = "\n Hello {}, Here is the link to your student lab environment: \n " \
-                    "https://labs.alta3.com/?path=test-00{}&password=alta3&autoconnect=true&resize=scale".format(x[0],
-                                                                                                        student_count)
+                    "https://labs.alta3.com/?path=test-00{}&password={}&autoconnect=true&resize=scale".format(x[0],
+                                                                                                        student_count, lab_pass)
             elif student_count < 100:
                 body = "\n Hello {}, Here is the link to your student lab environment: \n " \
-                       "https://labs.alta3.com/?path=test-0{}&password=alta3&autoconnect=true&resize=scale".format(x[0],
-                                                                                                        student_count)
+                       "https://labs.alta3.com/?path=test-0{}&password={}&autoconnect=true&resize=scale".format(x[0],
+                                                                                                        student_count, lab_pass)
             else:
                 body = "\n Hello {}, Here is the link to your student lab environment: \n " \
-                       "https://labs.alta3.com/?path=test-{}&password=alta3&autoconnect=true&resize=scale".format(x[0],
-                                                                                                        student_count)
+                       "https://labs.alta3.com/?path=test-{}&password={}&autoconnect=true&resize=scale".format(x[0],
+                                                                                                        student_count, lab_pass)
             email_text = """
             From: {}
             To: {}

@@ -5,9 +5,9 @@ import getpass  # To get a password without exposing it to the world
 
 
 def send_lab_link():
-    sent_from = input("Instructor Email: ") # TODO sysargs
+    sent_from = input("Instructor Email: ")  # TODO sysargs
     email_password = getpass.getpass(prompt="Email Password: ")
-    with open("students.txt") as students:  # Opens the 
+    with open("students.txt") as students:  # Opens the
         csv_reader = csv.reader(students, delimiter=",")
         student_count = 1
         for x in csv_reader:
@@ -37,14 +37,13 @@ def send_lab_link():
                 smtpObj.login(sent_from, email_password)
                 smtpObj.sendmail(sent_from, to, email_text)  # Send it
                 smtpObj.close()  # Close the session
-                print("Successfully sent email to{}".format(x[1]))
+                print("Successfully sent email to{}".format(to))
 
             except smtplib.SMTPException:  # Except when there is an email error
                 print("Error: unable to send email")
             student_count += 1
-           
-# Call the function
-# send_lab_link()
 
+# Call the function
+send_lab_link()
 
 

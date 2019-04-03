@@ -39,7 +39,7 @@ from email.mime.text import MIMEText
 from email.utils import COMMASPACE, formatdate
 
 
-def send_mail(send_from, send_to, text="Default Text", subject="Default Subject", files=None):
+def send_mail(send_from, send_to, text="Default Text", subject="Default Subject", files=None, server="smtp.gmail.com", port="465"):
     assert isinstance(send_to, list)
     email_password = getpass.getpass("Email Password: ")      
     msg = MIMEMultipart()
@@ -61,8 +61,8 @@ def send_mail(send_from, send_to, text="Default Text", subject="Default Subject"
         msg.attach(part)
 
     try:  # To send an email
-        smtpObj = smtplib.SMTP_SSL('smtp.gmail.com', 465)  # Using Gmail's secure server
-        smtpObj.ehlo()  # Introduce yourself to Gmail's server
+        smtpObj = smtplib.SMTP_SSL(server, int(port))  # Default to Gmail's secure server
+        smtpObj.ehlo()  # Introduce yourself to the email server
         smtpObj.login(send_from, email_password)
         smtpObj.sendmail(send_from, send_to, msg.as_string())  # Send it
         smtpObj.close()  # Close the session

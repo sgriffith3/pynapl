@@ -1,7 +1,33 @@
 """
-This is a script to send out an HTML email from Gmail
-"""
+This is a script to send out an HTML email from Gmail, with files attached
 
+Below is an example email you might send to someone using the HTeMaiL function
+
+# Your Email Address          - MANDATORY
+me = "someone@example.com"
+
+# Their Email Addresses - Must be a list              - MANDATORY
+them = ["someoneelse@gmail.com", "another@gmail.com"]
+
+# The Email Text - Can be written in HTML for prettyness' sake   - DEFAULT "Default Text"
+body = "Send a file with this email"
+
+# The subject that you want for your email          - DEFAULT "Default Subject"
+subj = "Your Email Subject"
+
+# Get your signature by opening email you sent > Right click on signature > Inspect Element >
+# Find div of gmail_signature > Right Click > Copy OuterHTML
+signature = '''
+some really really really long html path (4000 + characters in my case)
+'''
+
+# Any attachments to send, default NONE
+attachments = ["myfile.txt", "yourfile.txt"]
+
+# Call the function
+# send_mail(me, them, "{} {}".format(body, signature), subj, files=attachments)
+
+"""
 
 #!/usr/bin/env python3
 import smtplib
@@ -13,7 +39,7 @@ from email.mime.text import MIMEText
 from email.utils import COMMASPACE, formatdate
 
 
-def send_mail(send_from, send_to, subject, text, files=None):
+def send_mail(send_from, send_to, text="Default Text", subject="Default Subject", files=None):
     assert isinstance(send_to, list)
     email_password = getpass.getpass("Email Password: ")      
     msg = MIMEMultipart()
@@ -31,7 +57,7 @@ def send_mail(send_from, send_to, subject, text, files=None):
                 Name=basename(f)
             )
         # After the file is closed
-        part['Content-Disposition'] = 'attachment; filename="%s"' % basename(f)
+        part['Content-Disposition'] = 'attachment; filename="{}"'.format(basename(f))
         msg.attach(part)
 
     try:  # To send an email
@@ -46,27 +72,3 @@ def send_mail(send_from, send_to, subject, text, files=None):
         print("Error: unable to send email")
 
 
-
-# Your Email Address
-me = "someone@example.com"
-
-# Their Email Addresses - Currently must be a list
-them = ["someoneelse@gmail.com", "another@gmail.com"]
-
-# The subject that you want for your email
-subj = "Your Email Subject"
-
-# The Email Text - Can be written in HTML for prettyness' sake
-body = "Send a file with this email"
-
-# Get your signature by opening email you sent > Right click on signature > Inspect Element >
-# Find div of gmail_signature > Right Click > Copy OuterHTML
-signature = '''
-some really really really long html path (4000 + characters in my case)
-'''
-
-# Any attachments to send, default NONE
-attachments = ["myfile.txt", "yourfile.txt"]
-
-# Call the function
-# send_mail(me, them, subj, "{} {}".format(body, signature), files=attachments)

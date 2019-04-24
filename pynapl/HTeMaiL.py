@@ -58,6 +58,7 @@ attachments = ["myfile.txt", "yourfile.txt"]
 
 """
 
+
 def send_mail(send_from, send_to, text="Default Text", subject="Default Subject", files=None, server="smtp.gmail.com", port="465"):
     password = getpass.getpass("Email Password: ")
     assert isinstance(send_to, list)
@@ -91,13 +92,14 @@ def send_mail(send_from, send_to, text="Default Text", subject="Default Subject"
         print("Error: unable to send email")
 
 
-
 """
 The auto_mail function allows users to set a password when calling the function. 
 
 The purpose of this is to allow users to iterate over a list of people to send an email to while only having
 to provide their email password one time.
 """
+
+
 def auto_mail(send_from, send_to, text="Default Text", subject="Default Subject", files=None, server="smtp.gmail.com", port="465", password="Email Password"):
     assert isinstance(send_to, list)
     msg = MIMEMultipart()

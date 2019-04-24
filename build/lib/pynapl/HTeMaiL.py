@@ -30,8 +30,8 @@ attachments = ["myfile.txt", "yourfile.txt"]
 """
 
 #!/usr/bin/env python3
+
 import smtplib
-import getpass
 from os.path import basename
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
@@ -39,9 +39,8 @@ from email.mime.text import MIMEText
 from email.utils import COMMASPACE, formatdate
 
 
-def send_mail(send_from, send_to, text="Default Text", subject="Default Subject", files=None, server="smtp.gmail.com", port="465"):
+def send_mail(send_from, send_to, text="Default Text", subject="Default Subject", files=None, server="smtp.gmail.com", port="465", password="Email Password"):
     assert isinstance(send_to, list)
-    email_password = getpass.getpass("Email Password: ")      
     msg = MIMEMultipart()
     msg['From'] = send_from
     msg['To'] = COMMASPACE.join(send_to)
@@ -63,7 +62,7 @@ def send_mail(send_from, send_to, text="Default Text", subject="Default Subject"
     try:  # To send an email
         smtpObj = smtplib.SMTP_SSL(server, int(port))  # Default to Gmail's secure server
         smtpObj.ehlo()  # Introduce yourself to the email server
-        smtpObj.login(send_from, email_password)
+        smtpObj.login(send_from, password)
         smtpObj.sendmail(send_from, send_to, msg.as_string())  # Send it
         smtpObj.close()  # Close the session
         print("Successfully sent email to{}".format(send_to))

@@ -16,7 +16,7 @@ Three Steps to Email:
 
 """
 
-import getpass
+
 import smtplib
 from os.path import basename
 from email.mime.application import MIMEApplication
@@ -59,8 +59,7 @@ attachments = ["myfile.txt", "yourfile.txt"]
 """
 
 
-def send_mail(send_from, send_to, text="Default Text", subject="Default Subject", files=None, server="smtp.gmail.com", port="465"):
-    password = getpass.getpass("Email Password: ")
+def send_mail(send_from, send_to, text="Default Text", subject="Default Subject", files=None, server="smtp.gmail.com", port="465", password="Email Password"):
     assert isinstance(send_to, list)
     msg = MIMEMultipart()
     msg['From'] = send_from
@@ -91,42 +90,3 @@ def send_mail(send_from, send_to, text="Default Text", subject="Default Subject"
     except smtplib.SMTPException:  # Except when there is an email error
         print("Error: unable to send email")
 
-
-"""
-The auto_mail function allows users to set a password when calling the function. 
-
-The purpose of this is to allow users to iterate over a list of people to send an email to while only having
-to provide their email password one time.
-"""
-
-
-def auto_mail(send_from, send_to, text="Default Text", subject="Default Subject", files=None, server="smtp.gmail.com", port="465", password="Email Password"):
-    assert isinstance(send_to, list)
-    msg = MIMEMultipart()
-    msg['From'] = send_from
-    msg['To'] = COMMASPACE.join(send_to)
-    msg['Date'] = formatdate(localtime=True)
-    msg['Subject'] = subject
-
-    msg.attach(MIMEText(text, 'html'))  # 'html' allows you to send msg in html
-
-    for f in files or []:
-        with open(f, "rb") as fil:
-            part = MIMEApplication(
-                fil.read(),
-                Name=basename(f)
-            )
-        # After the file is closed
-        part['Content-Disposition'] = 'attachment; filename="{}"'.format(basename(f))
-        msg.attach(part)
-
-    try:  # To send an email
-        smtpObj = smtplib.SMTP_SSL(server, int(port))  # Default to Gmail's secure server
-        smtpObj.ehlo()  # Introduce yourself to the email server
-        smtpObj.login(send_from, password)
-        smtpObj.sendmail(send_from, send_to, msg.as_string())  # Send it
-        smtpObj.close()  # Close the session
-        print("Successfully sent email to{}".format(send_to))
-
-    except smtplib.SMTPException:  # Except when there is an email error
-        print("Error: unable to send email")

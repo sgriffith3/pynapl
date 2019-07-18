@@ -76,4 +76,3 @@ No warranties. No guarantees. But feel free to enjoy as you please.
 ### License
 
 **pynapl** is registered under the MIT license - That means if you use it, mention me and we're cool.
-

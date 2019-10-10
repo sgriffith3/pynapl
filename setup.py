@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pynapl",
-    version="0.0.7",
+    version="0.0.8",
     author="Sam Griffith",
     author_email="samgriffith3@gmail.com",
     description="Python Native Automation Package Library",
@@ -16,7 +16,7 @@ setuptools.setup(
     url="https://github.com/sgriffith3/pynapl",
     packages=['pynapl'],
     classifiers=[
-        "Programming Language :: Python 3",
+        "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],

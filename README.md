@@ -9,14 +9,16 @@ The Tastiest Code You May Ever Consume
 
 Currently, **pynapl** will allow you to send emails. More will come!
 
-## Details
+#### Details
 **pynapl.send_mail()**
 
 This is a script to send out an HTML email.
 
-### NEVER TESTED ON REAL FRUIT
+#### NEVER TESTED ON REAL FRUIT
 No warranties. No guarantees. But feel free to enjoy as you please. 
 
 ### License
 
-**pynapl** is registered under the MIT license - That means if you use it, mention me and we're cool.
+**pynapl** is registered under the MIT license.
+
+That means if you use it, mention me (keep the license in place) and we're cool.

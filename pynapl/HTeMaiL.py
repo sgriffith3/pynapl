@@ -27,9 +27,9 @@ from email.mime.text import MIMEText
 from email.utils import COMMASPACE, formatdate
 
 
-def send_mail(send_from, send_to, text='This email was sent via a Python Script, using PYNAPL',
+def send_mail(send_from, send_to, password, text='This email was sent via a Python Script, using PYNAPL',
               subject="An email from PYNAPL", files=None, server="smtp.gmail.com",
-              port="465", password=getpass()):
+              port="465"):
 
     """Allows you to send emails
 

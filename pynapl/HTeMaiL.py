@@ -84,5 +84,6 @@ def send_mail(send_from, send_to, password, text='This email was sent via a Pyth
         smtp_obj.close()  # Close the session
         print("Successfully sent email to {}".format(send_to))
 
-    except smtplib.SMTPException:  # Except when there is an email error
+    except smtplib.SMTPException as err:  # Except when there is an email error
         print("Error: unable to send email to {}".format(send_to))
+        print(f"The error was\n{err}")
